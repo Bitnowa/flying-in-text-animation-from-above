@@ -1,0 +1,32 @@
+let currentIndex = 0;
+const textOptions = [
+  "Web Development",
+  "KI Automatisierung",
+  "Web Designing",
+  "kreatives Marketing"
+];
+const textSlider = document.querySelector("#text-slider");
+const dynamicText = document.querySelector("#dynamicText");
+
+function updateText() {
+  if (currentIndex >= textOptions.length) {
+    currentIndex = 0;
+  }
+
+  dynamicText.innerHTML = "";
+  dynamicText.classList.remove("hold-animation");
+  dynamicText.classList.add("hold-animation");
+
+  for (let i = 0; i < textOptions[currentIndex].length; i++) {
+    const letterElement = document.createElement("div");
+    letterElement.innerHTML = textOptions[currentIndex][i] === " " ? "&nbsp;" : textOptions[currentIndex][i];
+    letterElement.classList.add("fade-start", "fade-animation");
+    letterElement.style.animationDelay = `${i / 10}s`;
+    dynamicText.appendChild(letterElement);
+  }
+
+  currentIndex++;
+}
+
+updateText();
+setInterval(updateText, 2500);
